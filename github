@@ -5,4 +5,7 @@ HOW TO USE GITHUB:
 3. make all of your changes and when it you are done, click 'commit'
 4. tick the changes box and write a small comment about what you've done, click 'commit' at the bottom
     DONT click 'commit and push'
-5. 
+5. now click 'push' - it will automatically send changes to the github repo, DONT click create pull request
+6. once the commit is checked for merge conflicts - all the changes are pushed to the main branch
+7. now you can safely checkout to main branch: REMOTE > ORIGIN > MAIN : checkout
+DO NOT CHECKOUT onto LOCAL, ALWAYS REMOTE.
