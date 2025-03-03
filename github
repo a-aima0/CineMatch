@@ -9,3 +9,5 @@ HOW TO USE GITHUB:
 6. once the commit is checked for merge conflicts - all the changes are pushed to the main branch
 7. now you can safely checkout to main branch: REMOTE > ORIGIN > MAIN : checkout
 DO NOT CHECKOUT onto LOCAL, ALWAYS REMOTE.
+
+test
