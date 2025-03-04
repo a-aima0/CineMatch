@@ -1,11 +1,15 @@
 HOW TO USE GITHUB:
 
 1. when you open the project, firstly 'update project' to you can see the most recent changes
-2. if you want to work on the project, ALWAYS create a new branch: '+ new branch' - make sure to click checkout box
-3. make all of your changes and when it you are done, click 'commit'
-4. tick the changes box and write a small comment about what you've done, click 'commit' at the bottom
-    DONT click 'commit and push'
-5. now click 'push' - it will automatically send changes to the github repo, DONT click create pull request
+2. if you want to work on the project, ALWAYS create a new branch: '+ new branch'
+3. make all of your changes and when it you are done, click 'commit' and write a small comment of changes made
+5. now click 'push' then click 'create pull request '- it will automatically send changes to the github repo
 6. once the commit is checked for merge conflicts - all the changes are pushed to the main branch
 7. now you can safely checkout to main branch: REMOTE > ORIGIN > MAIN : checkout
 DO NOT CHECKOUT onto LOCAL, ALWAYS REMOTE.
+
+SUMMARY:
+- UPDATE project upon first launch
+- ALWAYS create new branch, DO NOT work in MAIN
+- COMMIT, PUSH, CREATE PULL REQUEST
+- Checkout onto REMOTE, NOT local
