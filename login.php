@@ -35,7 +35,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $_SESSION["username"] = $username;
 
 
-        header("location: homepage.php");
+        header("location: home.php");
         die();
     } else {
         $error_message = "Invalid username or password";
