@@ -3,6 +3,7 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_PATH = "https://image.tmdb.org/t/p/w500";
 const IMG_PATH_HIGH_QUALITY = "https://image.tmdb.org/t/p/original";
 
+
 //  Function to Display Movies in a Specific Container
 function displayMovies(movies, containerId) {
     const movieGrid = document.getElementById(containerId);
@@ -68,29 +69,40 @@ async function fetchTopRatedMovies() {
     displayMovies(data.results, "top-rated-list");
 }
 
-//  Fetch a Random Featured Movie for Hero Section
-async function fetchFeaturedMovie() {
+// Fetch Random Featured Movies for Hero Section
+async function fetchFeaturedMovies() {
     if (!document.querySelector(".hero")) return;
+
     const res = await fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`);
     const data = await res.json();
-    if (data.results.length > 0) {
-        const movie = data.results[0];
+    const movies = data.results.slice(0, 5); // Get the top 5 trending movies
 
-        document.getElementById("featured-title").innerText = movie.title;
-        document.getElementById("duration").innerText = `Duration: ${movie.runtime || "N/A"} min`;
-        document.getElementById("imdb-rating").innerText = `IMDB: ${movie.vote_average}`;
-        document.getElementById("description").innerText = movie.overview;
+    const genresRes = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+    const genreData = await genresRes.json();
 
-        // Fetch genre names based on genre IDs
-        const genres = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
-        const genreData = await genres.json();
+    const featuredMoviesContainer = document.getElementById("featured-movies");
+    featuredMoviesContainer.innerHTML = ""; // Clear existing content
+
+    movies.forEach(movie => {
         const movieGenres = movie.genre_ids.map(id => genreData.genres.find(g => g.id === id)?.name).join(", ");
-        document.getElementById("genres").innerText = `Genre: ${movieGenres}`;
 
-        // Set high-quality background image
-        document.querySelector(".hero").style.backgroundImage = `url(${IMG_PATH_HIGH_QUALITY + movie.backdrop_path})`;
-    }
+        const movieHTML = `
+            <div class="hero-movie-card" style="background-image: url('${IMG_PATH_HIGH_QUALITY + movie.backdrop_path}')">
+                <h1>${movie.title}</h1>
+                <div class="info">
+                    <span class="hero-badge">HD</span>
+                    <span>Release: ${movie.release_date || "N/A"}</span>
+                    <span>IMDB: ${movie.vote_average}</span>
+                    <span>Genre: ${movieGenres}</span>
+                </div>
+                <p>${movie.overview}</p>
+            </div>
+        `;
+        featuredMoviesContainer.innerHTML += movieHTML;
+    });
 }
+
+
 
 //  Watchlist Functionality
 function addToWatchlist(id, title, image) {
@@ -163,7 +175,7 @@ fetchRecommendedMovies(); // Home Page
 fetchTrendingMovies(); // Home Page
 fetchTVShows(); // TV Shows Page
 fetchTopRatedMovies(); // Top Rated Page
-fetchFeaturedMovie(); // Home Page
+fetchFeaturedMovies(); // Home Page
 
 // Fetch and Display Genres in Dropdown
 async function fetchGenres() {
@@ -241,7 +253,7 @@ async function fetchSearchResults() {
 // ✅ Fetch and Display Related Movies
 async function fetchRelatedMovies(movieId) {
     try {
-        const res = await fetch(`${BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}`);
+        const res = await fetch(`${BASE_URL}/movie/${movieId}/recommendations?api_key=${API_KEY}`);
         const data = await res.json();
         if (data.results.length > 0) {
             displayMovies(data.results, "related-movies"); // ✅ Show related movies
@@ -251,14 +263,15 @@ async function fetchRelatedMovies(movieId) {
     }
 }
 
-// ✅ Function to Display Movies in a Grid
+
+//  Function to Display Movies in a Grid
 function displayMovies(movies, containerId) {
     const movieGrid = document.getElementById(containerId);
     if (!movieGrid) return;
 
     movieGrid.innerHTML = ""; // Clear old results
 
-    movies.slice(0, 16).forEach(movie => { // ✅ Show up to 16 movies
+    movies.slice(0, 16).forEach(movie => { // show 16 movies
         const movieCard = document.createElement("div");
         movieCard.classList.add("movie-card");
         movieCard.innerHTML = `
@@ -269,6 +282,8 @@ function displayMovies(movies, containerId) {
         movieGrid.appendChild(movieCard);
     });
 }
+
+
 
 // ✅ Run search function only on `search.php`
 if (document.getElementById("search-results")) {

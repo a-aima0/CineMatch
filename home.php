@@ -31,7 +31,7 @@ $conn->close();
 
     <!-- Hero Section (Featured Movie) -->
     <section class="hero">
-        <div class="hero-content">
+        <div id="featured-movies" class="hero-content">
             <h1 id="featured-title">Movie Title</h1>
             <div class="info">
                 <span class="badge">HD</span>
@@ -53,7 +53,7 @@ $conn->close();
 
     <!-- Movie Grid -->
     <section class="movie-grid">
-        <h2>Recommended for You</h2>
+        <h2 id="recommended-for-you">Recommended for You</h2>
         <div class="grid" id="movie-list"></div>
     </section>
 
