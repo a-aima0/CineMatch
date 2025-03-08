@@ -24,7 +24,7 @@
         <button id="search-button"><i class="material-icons">search</i></button>
 
     </div>
-    <div class="logout-button">
+    <div class="logout-button"  style="float:right;">
         <a href="logout.php">Logout</a>
     </div>
 </header>
