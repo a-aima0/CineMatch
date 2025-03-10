@@ -14,6 +14,7 @@
             <li><a href="tv_shows.php">TV Shows</a></li>
             <li><a href="watchlist.php">Watchlist <span id="watchlist-count">(0)</span></a></li>
             <li><a href="#" id="random-button">🎲 Random</a></li>
+            <li><a href="quiz.php">Quiz</a></li>
 
 
 
