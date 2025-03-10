@@ -77,7 +77,7 @@ nav a {
     background: #222;
     border-radius: 30px;
     padding: 2px;
-    margin-left: 60px;
+    margin-left: 40px;
 }
 
 .search-bar input {
@@ -403,7 +403,7 @@ nav, header, .dropdown {
     display: grid;
     grid-template-columns: repeat(8, minmax(150px, 1fr)); /* 8 per row */
     gap: 20px; /* Space between movies */
-    width: 95vw;
+    width: 100vw;
     max-width: 1vh; /* Ensures content doesn't stretch too wide */
 }
 
@@ -575,3 +575,28 @@ header {
 .trending-scroll::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+/*quiz styling*/
+
+/* Basic CSS to style the movie recommendations */
+#results-container {
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+    /*gap: 20px;*/
+    /*justify-content: center;*/
+    /*padding: 20px;*/
+    display: grid;
+    grid-template-columns: repeat(8, minmax(150px, 1fr)); /* 8 per row */
+    gap: 20px; /* Space between movies */
+    width: 100vw;
+    max-width: 1vh; /* Ensures content doesn't stretch too wide */
+}
+
+
+.quiz_movie img {
+    width: 100%;
+    border-radius: 10px;
+    height: 230px;
+}
+
+

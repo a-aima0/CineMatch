@@ -110,9 +110,9 @@ function addToWatchlist(id, title, image) {
     if (!watchlist.some(movie => movie.id === id)) {
         watchlist.push({ id, title, image });
         localStorage.setItem("watchlist", JSON.stringify(watchlist));
-        alert("Added to Watchlist! ✅");
+        alert("Added to Watchlist! ");
     } else {
-        alert("This movie is already in your Watchlist! 📝");
+        alert("This movie is already in your Watchlist! ");
     }
 }
 
@@ -211,7 +211,7 @@ fetchGenres();
 
 
 
-// ✅ Attach event listener to search button
+//  Attach event listener to search button
 document.getElementById("search-button").addEventListener("click", function () {
     const query = document.getElementById("search-input").value.trim();
     if (query) {
@@ -219,28 +219,28 @@ document.getElementById("search-button").addEventListener("click", function () {
     }
 });
 
-// ✅ Fetch and Display Search Results in `search.php`
+//  Fetch and Display Search Results in `search.php`
 async function fetchSearchResults() {
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get("query");
 
     if (!query) return; // Stop if no search query
 
-    // ✅ Set search title
+    //  Set search title
     document.getElementById("search-title").innerText = `Search results for "${query}"`;
 
     try {
-        // ✅ Fetch search results
+        //  Fetch search results
         const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
         const data = await res.json();
 
         if (data.results.length === 0) {
             document.getElementById("search-results").innerHTML = "<p>No results found.</p>";
         } else {
-            displayMovies(data.results, "search-results"); // ✅ Display search results
+            displayMovies(data.results, "search-results"); //  Display search results
         }
 
-        // ✅ Fetch related movies if at least one result is found
+        //  Fetch related movies if at least one result is found
         if (data.results.length > 0) {
             const firstMovieId = data.results[0].id;
             fetchRelatedMovies(firstMovieId);
@@ -250,13 +250,13 @@ async function fetchSearchResults() {
     }
 }
 
-// ✅ Fetch and Display Related Movies
+//  Fetch and Display Related Movies
 async function fetchRelatedMovies(movieId) {
     try {
         const res = await fetch(`${BASE_URL}/movie/${movieId}/recommendations?api_key=${API_KEY}`);
         const data = await res.json();
         if (data.results.length > 0) {
-            displayMovies(data.results, "related-movies"); // ✅ Show related movies
+            displayMovies(data.results, "related-movies"); //  Show related movies
         }
     } catch (error) {
         console.error("Error fetching related movies:", error);
@@ -285,7 +285,105 @@ function displayMovies(movies, containerId) {
 
 
 
-// ✅ Run search function only on `search.php`
+//  Run search function only on `search.php`
 if (document.getElementById("search-results")) {
     fetchSearchResults();
 }
+
+//  slider preferences
+document.getElementById('submitQuiz').addEventListener('click', function(e) {
+    e.preventDefault();
+    // const formData = {
+    //     genre: document.getElementById('genre_question').value,
+    //     weather: document.getElementById('weather_question').value,
+    //     mood: document.getElementById('mood_question').value,
+    //     company: document.getElementById('company_question').value,
+    //     genre_weight: document.getElementById('genre_slider').value,
+    //     rating_weight: document.getElementById('rating_slider').value,
+    //     recency_weight: document.getElementById('recency_slider').value,
+    //     popularity_weight: document.getElementById('popularity_slider').value,
+    //     keyword_weight: document.getElementById('keywords_slider').value,
+    //     collaborative_weight: document.getElementById('collaborative_slider').value,
+    // };
+
+    const genre = document.getElementById('genre_question').value;
+    const weather = document.getElementById('weather_question').value;
+    const mood = document.getElementById('mood_question').value;
+    const company = document.getElementById('company_question').value;
+    const genre_weight=  document.getElementById('genre_slider').value;
+    const rating_weight=  document.getElementById('rating_slider').value;
+    const recency_weight=  document.getElementById('recency_slider').value;
+    const popularity_weight=  document.getElementById('popularity_slider').value;
+    const keyword_weight=  document.getElementById('keywords_slider').value;
+    const collaborative_weight=  document.getElementById('collaborative_slider').value;
+
+    // Log the data to the console before sending
+    // console.log('Sending data to backend:', formData);
+    fetch('process_quiz.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            genre: genre,
+            weather: weather,
+            mood: mood,
+            company: company,
+            genre_weight: genre_weight,
+            rating_weight: rating_weight,
+            recency_weight: recency_weight,
+            popularity_weight: popularity_weight,
+            keyword_weight: keyword_weight,
+            collaborative_weight: collaborative_weight
+
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Data received from backend:', data);
+
+            // Check if results exist
+            if (data.results && data.results.length > 0) {
+                const resultsContainer = document.getElementById('results-container');
+                resultsContainer.innerHTML = ''; // Clear any previous results
+
+                data.results.forEach(quizMovie => {
+                    const quizMovieElement = document.createElement('div');
+                    quizMovieElement.classList.add('quiz_movie');
+
+                    // Movie title
+                    const titleElement = document.createElement('h2');
+                    titleElement.textContent = quizMovie.title || 'No title available';
+
+                    // Movie overview
+                    const overviewElement = document.createElement('p');
+                    overviewElement.textContent = quizMovie.overview || 'No description available';
+
+                    // Movie poster image
+                    const posterElement = document.createElement('img');
+                    if (quizMovie.poster_path) {
+                        posterElement.src = `https://image.tmdb.org/t/p/w500${quizMovie.poster_path}`;
+                        posterElement.alt = `Poster of ${quizMovie.title}`;
+                    } else {
+                        posterElement.src = 'default_poster.jpg'; // Use a default poster if no poster path is available
+                        posterElement.alt = 'No poster available';
+                    }
+
+                    // Add movie details to the quiz movie element
+                    quizMovieElement.appendChild(titleElement);
+                    quizMovieElement.appendChild(overviewElement);
+                    quizMovieElement.appendChild(posterElement);
+
+                    // Append the quiz movie element to the results container
+                    resultsContainer.appendChild(quizMovieElement);
+                });
+            } else {
+                console.log('No movie results found.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching movie data:', error);
+        });
+
+
+});
