@@ -32,6 +32,7 @@ $conn->close();
 
     <script src="script.js"></script>
     <script>
+
         async function fetchMoviesByGenre() {
             const urlParams = new URLSearchParams(window.location.search);
             const genreId = urlParams.get("genre_id");
@@ -41,7 +42,7 @@ $conn->close();
 
             document.getElementById("genre-title").innerText = `Genre: ${genreName}`;
 
-            const res = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`);
+            const res = await fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&language=en-US&vote_count.gte=300`);
             const data = await res.json();
             displayMovies(data.results);
         }

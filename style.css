@@ -168,7 +168,7 @@ nav a {
 
 
 /* Movie Grid Container */
-.grid, #related-movies, #search-results{
+.grid, #related-movies, #search-results, #movie-list{
     display: grid;
     flex-wrap: wrap;
     justify-content: center;
@@ -179,6 +179,8 @@ nav a {
     margin: 0 auto;
 
 }
+
+
 
 /* Movie Card */
 .movie-card {
@@ -201,7 +203,7 @@ nav a {
 }
 
 /* Movie Grid Container */
-.grid, #related-movies, #search-results{
+.grid, #related-movies, #search-results, #movie-list {
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap onto the next line */
     justify-content: center; /* Center the items horizontally */

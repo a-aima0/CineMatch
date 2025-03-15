@@ -34,7 +34,7 @@ $conn->close();
     <script src="script.js"></script>
     <script>
         async function fetchTVShows() {
-            const res = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}`);
+            const res = await fetch(`${BASE_URL}/discover/tv?api_key=${API_KEY}&language=en-US&vote_count.gte=300`);
             const data = await res.json();
             displayMovies(data.results, "tv-show-list");
         }
