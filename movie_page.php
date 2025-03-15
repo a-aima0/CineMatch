@@ -17,7 +17,7 @@ $conn->close();
     <head>
         <link rel="stylesheet" href="index.css">
         <meta charset="UTF-8">
-        <link rel="shortcut icon" href="Picture2.png">
+        <link rel="shortcut icon" href="assets/cinematch_logo.png" type="image/x-icon">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--using FontAwesome-->
         <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
@@ -25,25 +25,8 @@ $conn->close();
         <div class = "center">
     </head>
     <body>
-        <!---navigation bar-->
-        <nav>
-            <!---logo-->
-            <a href="#" class="logo">
-                <img src="Picture3.png"/>
-            </a>
-            <div class = "btns">
-                <button>Home</button>
-                <button>Search</button>
-                <button>Contact Us</button>
-                <button>Profile</button>
-            </div>
-            <div class="search">
-                <input type="text" placeholder="Search"/>
-                <!--search-icon-not working rn-->
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-        </nav>
-        <br>
+    <?php include_once('header.php'); ?>
+
         <h1>CineMatch</h1>
         <p>Hello welcome to CineMatch I hope you find
             what you're looking for!
@@ -55,7 +38,7 @@ $conn->close();
             <!----showcase-box-->
             <div class = "info">
                 <div class="showcase-box">
-                    <img src="img1.jpg"/>
+                    <img src="assets/placeholder_img.jpg" id="img"/>
                 </div>
                 <article>
                     <p>Here is a description about the film. It includes

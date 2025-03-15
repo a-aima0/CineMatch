@@ -2,66 +2,6 @@
     text-align:center;
 }
 
-body{
-    background-color: #5801b1;
-    color: rgb(255, 222, 32);
-}
-
-.btns button{
-    background-color: #5801b1;
-    border: 1px solid #5801b1;
-    color: rgb(255, 222, 32);
-    padding: 10px 24px;
-    cursor: pointer;
-    float: left;
-}
-.btns button:not(:last-child){
-    border-right: none;
-}
-.btns:after{
-    content:"";
-    clear:both;
-    display:table;
-}
-.btns button:hover{
-    background-color: #400190;
-}
-nav{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    border: 1px solid rgba(0,0,0,0.04);
-    background-color: #5801b1;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 100;
-}
-.logo{
-    height:35px;
-}
-.search{
-    width: 250px;
-    height: 40px;
-    background-color: rgba(245,245,245,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    padding: 0px 20px;
-}
-.search input{
-    width: 100%;
-    height: 30px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-#main{
-    padding-top: 80px;
-    background-color: #5801b1;
-}
 .info{
     display: flex;
     align-items: center;
@@ -96,3 +36,310 @@ article {
     padding-left: 20px;
     font-size: 30px;
 }
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: white;
+    margin: 0;
+    padding-top: 80px;
+    width: 100%; /* Ensure the width doesn't exceed the viewport */
+    overflow-x: hidden;
+}
+
+
+
+/* Sticky Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 30px;
+    overflow: hidden;
+    background: black;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1DBF73;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.logout-button{
+    margin-left: 20px;
+    border: 1px white solid;
+    border-radius: 5px;
+    padding: 5px;
+
+
+}
+
+/*logout button*/
+.logout-button a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    text-align: right;
+
+}
+.logout-button a:hover{
+    color: white;
+    font-size: 16px;
+    padding: 5px;
+    font-weight: bold;
+
+}
+
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: #222;
+    border-radius: 30px;
+    padding: 2px;
+    margin-left: 40px;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 8px;
+    width: 280px;
+    outline: none;
+}
+
+.search-bar button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding:6px;
+    color: white;
+    font-size: 18px;
+}
+
+/* Make the search icon change color when hovered */
+.search-bar button:hover {
+    color: rgb(64, 64, 64); /* Green color like Netflix */
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: white;
+    margin: 0;
+    padding-top: 80px;
+    width: 100%; /* Ensure the width doesn't exceed the viewport */
+    overflow-x: hidden;
+}
+
+
+
+/* Sticky Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 30px;
+    overflow: hidden;
+    background: black;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1DBF73;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.logout-button{
+    margin-left: 20px;
+    border: 1px white solid;
+    border-radius: 5px;
+    padding: 5px;
+
+
+}
+
+/*logout button*/
+.logout-button a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    text-align: right;
+
+}
+.logout-button a:hover{
+    color: white;
+    font-size: 16px;
+    padding: 5px;
+    font-weight: bold;
+
+}
+
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: #222;
+    border-radius: 30px;
+    padding: 2px;
+    margin-left: 40px;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 8px;
+    width: 250px;
+    outline: none;
+}
+
+.search-bar button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding:6px;
+    color: white;
+    font-size: 18px;
+}
+
+/* Make the search icon change color when hovered */
+.search-bar button:hover {
+    color: rgb(64, 64, 64); /* Green color like Netflix */
+}
+
+
+/* Button Styling */
+#random-button {
+    background-color: rgb(73, 75, 135);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#random-button:hover {
+    background-color: rgb(73, 75, 135);
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    display: none;
+    background: black;
+    padding: 5px;
+    list-style: none;
+    top: 100%; /* Position it directly below the parent */
+    left: 0;
+    min-width: 150px;
+    z-index: 9999; /* Bring the dropdown above other elements */
+}
+
+/* Show the dropdown when hovering */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    padding: 4px;
+}
+
+.dropdown-menu li a {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Optionally add hover effect on menu items */
+.dropdown-menu li a:hover {
+    background-color: #444;
+}
+
+body, html {
+    position: relative; /* Ensures body is layered above anything else */
+    z-index: 1;
+}
+
+nav {
+    position: relative;
+    z-index: 2;
+}
+
+nav, header, .dropdown {
+    overflow: visible;
+}
+
+
+header {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* Logo Section */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo Image */
+.logo img {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Logo Text */
+.logo span {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(195, 140, 21);
+}
+
+
