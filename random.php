@@ -44,7 +44,7 @@ $conn->close();
         async function fetchRandomMovieOrTV() {
             const randomType = Math.random() < 0.5 ? "movie" : "tv"; // 50% chance of movie or TV show
             const randomPage = Math.floor(Math.random() * 500) + 1; // Random page from TMDb
-            const res = await fetch(`${BASE_URL}/discover/${randomType}?api_key=${API_KEY}&page=${randomPage}`);
+            const res = await fetch(`${BASE_URL}/discover/${randomType}?api_key=${API_KEY}&page=${randomPage}&vote_count.gte=300`);
             const data = await res.json();
 
             if (data.results.length > 0) {

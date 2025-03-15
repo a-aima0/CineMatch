@@ -67,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'title' => $movie['title'],
                 'overview' => $movie['overview'],
                 'release_date' => $movie['release_date'],
+
                 'poster_path' => 'https://image.tmdb.org/t/p/w500' . $movie['poster_path'],
                 'vote_average' => $movie['vote_average'],
             ];

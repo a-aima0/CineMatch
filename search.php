@@ -31,7 +31,7 @@ $conn->close();
     <div class="movie-grid" id="search-results"></div>
 </section>
 <section class="related-movies">
-    <h2>Related Movies</h2>
+    <h2>Recommended Movies:</h2>
     <div class="movie-grid" id="related-movies"></div>
 </section>
 
@@ -53,7 +53,7 @@ $conn->close();
 
             if (data.results.length > 0) {
                 displayMovies(data.results, "search-results");
-                fetchRelatedMovies(data.results[0].id);
+                fetchRelatedMovies(data.results);
             } else {
                 document.getElementById("search-results").innerHTML = "<p>No results found.</p>";
             }
@@ -63,13 +63,22 @@ $conn->close();
     }
 
     // Function to Fetch Related Movies
-    async function fetchRelatedMovies(movieId) {
+    async function fetchRelatedMovies(searchResults) {
+        const searchMovieIds = new Set(searchResults.map(movie => movie.id));
+
         try {
-            const res = await fetch(`${BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}`);
+            const res = await fetch(`${BASE_URL}/movie/${searchResults[0].id}/recommendations?api_key=${API_KEY}&vote_count.gte=300`);
             const data = await res.json();
 
             if (data.results.length > 0) {
-                displayMovies(data.results, "related-movies");
+                // Filter out movies that exist in the search results
+                const filteredResults = data.results.filter(movie => !searchMovieIds.has(movie.id));
+
+                if (filteredResults.length > 0) {
+                    displayMovies(filteredResults, "related-movies");
+                } else {
+                    document.getElementById("related-movies").innerHTML = "<p>No related movies found.</p>";
+                }
             } else {
                 document.getElementById("related-movies").innerHTML = "<p>No related movies found.</p>";
             }
@@ -78,7 +87,7 @@ $conn->close();
         }
     }
 
-    // Run search function when page loadsl
+
     fetchSearchResults();
 </script>
 
