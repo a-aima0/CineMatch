@@ -43,31 +43,46 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineMatch</title>
+    <meta name="viewport" content="width-device-width,
+         initial-scale=1">
+    <title>CineMatch login</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<?php if (!empty($error_message)) { ?>
+    <p><?= $error_message ?></p>
+<?php } ?>
 
-    <?php if (!empty($error_message)) { ?>
-        <p><?= $error_message ?></p>
-    <?php } ?>
+<div class="container">
+    <div class="leftBox"><img src="assets/placeholder_img.jpg" alt="CineMatch Logo"></div>
+    <div class="wrapper">
+        <form action="login.php" method="POST">
+            <h1>Welcome to Cinematch</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Username"  name="username"required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password"  name="password"required>
+                <i class='bx bxs-lock-alt' ></i>
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox">Remember me</label>
+                <a href="#">Forgot password?</a>
+            </div>
 
-    <h1>CineMatch</h1>
-    <form action="login.php" method="POST">
-        <label for="username">Username</label>
-        <input type="text" placeholder="username" name="username" required/>
-
-        <label for="password">Password</label>
-        <input type="password" placeholder="password" name="password" required/>
-
-        <input type="submit" value="Login">
-    </form>
-
-    <a href="register.php">Register</a>
-
+            <input type="submit" class="btn" value="Login">
+            <div class="register-link">
+                <p>Don't have an account? <a href="register.php">Register</a></p>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

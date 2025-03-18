@@ -44,7 +44,7 @@ $conn->close();
         async function fetchRandomMovieOrTV() {
             const randomType = Math.random() < 0.5 ? "movie" : "tv"; // 50% chance of movie or TV show
             const randomPage = Math.floor(Math.random() * 500) + 1; // Random page from TMDb
-            const res = await fetch(`${BASE_URL}/discover/${randomType}?api_key=${API_KEY}&page=${randomPage}&vote_count.gte=300`);
+            const res = await fetch(`${BASE_URL}/discover/${randomType}?api_key=${API_KEY}&page=${randomPage}&vote_count.gte=300&vote_average.gte=6.5`);
             const data = await res.json();
 
             if (data.results.length > 0) {
@@ -56,7 +56,7 @@ $conn->close();
 
         function displayRandomMovie(movie, type) {
             document.getElementById("random-title").innerText = movie.title || movie.name;
-            document.getElementById("random-duration").innerText = type === "movie" ? `Duration: ${movie.runtime || "N/A"} min` : "";
+            // document.getElementById("random-duration").innerText = type === "movie" ? `Duration: ${movie.runtime || "N/A"} min` : "";
             document.getElementById("random-imdb-rating").innerText = `IMDB: ${movie.vote_average}`;
             document.getElementById("random-description").innerText = movie.overview;
             document.getElementById("random-genres").innerText = "Genre: Fetching...";
