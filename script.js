@@ -26,7 +26,8 @@ function displayMovies(movies, containerId) {
 // Fetch Recommended Movies (Only on Home Page)
 async function fetchRecommendedMovies() {
     if (!document.getElementById("movie-list")) return; // Prevent errors on other pages
-    const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
+    const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&vote_count.gte=300&language=en-US&sort_by=popularity.desc`);
+
     const data = await res.json();
     displayMovies(data.results, "movie-list");
 }
@@ -34,7 +35,7 @@ async function fetchRecommendedMovies() {
 //  Fetch Trending Movies for Home Page Carousel
 async function fetchTrendingMovies() {
     if (!document.getElementById("trending-movies")) return; // Only run if on home page
-    const res = await fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`);
+    const res = await fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}&vote_count.gte=300`);
     const data = await res.json();
     displayTrendingMovies(data.results);
 }
@@ -103,58 +104,107 @@ async function fetchFeaturedMovies() {
 }
 
 
-
-//  Watchlist Functionality
-function addToWatchlist(id, title, image) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-    if (!watchlist.some(movie => movie.id === id)) {
-        watchlist.push({ id, title, image });
-        localStorage.setItem("watchlist", JSON.stringify(watchlist));
-        alert("Added to Watchlist! ");
-    } else {
-        alert("This movie is already in your Watchlist! ");
-    }
-}
-
+// Function to load the user's watchlist
 function loadWatchlist() {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-    const watchlistContainer = document.getElementById("watchlist");
-    if (!watchlistContainer) return;
+    fetch('watchlist.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'action=load'
+    })
+        .then(response => response.json())
+        .then(watchlist => {
+            console.log(watchlist);  // Log the watchlist data for debugging
 
-    watchlistContainer.innerHTML = "";
+            const watchlistContainer = document.getElementById("watchlist");
 
-    if (watchlist.length === 0) {
-        watchlistContainer.innerHTML = "<p>No movies added to your Watchlist yet.</p>";
-        return;
-    }
+            if (!watchlistContainer) {
+                console.warn("Skipping watchlist update: 'watchlist' container not found in DOM.");
+                return;
+            }
 
-    watchlist.forEach(movie => {
-        const movieCard = document.createElement("div");
-        movieCard.classList.add("movie-card");
-        movieCard.innerHTML = `
-            <img src="${movie.image}" alt="${movie.title}">
-            <h4>${movie.title}</h4>
-            <button class="remove-btn" onclick="removeFromWatchlist(${movie.id})">❌ Remove</button>
-        `;
-        watchlistContainer.appendChild(movieCard);
-    });
+            watchlistContainer.innerHTML = "";
+
+            if (watchlist.length === 0) {
+                watchlistContainer.innerHTML = "<p>No movies added to your Watchlist yet.</p>";
+                return;
+            }
+
+            watchlist.forEach(movie => {
+                const movieCard = document.createElement("div");
+                movieCard.classList.add("movie-card");
+                movieCard.innerHTML = `
+                    <img src="https://image.tmdb.org/t/p/w500/${movie.movie_image}" alt="${movie.movie_title}">
+                    <h4>${movie.movie_title}</h4>
+                    <button class="remove-btn" onclick="removeFromWatchlist(${movie.movie_id})">❌ Remove</button>
+                `;
+                watchlistContainer.appendChild(movieCard);
+            });
+        })
+        .catch(error => {
+            console.error("Failed to load watchlist:", error);
+        });
 }
 
+// Function to add a movie to the watchlist
+function addToWatchlist(id, title, image) {
+    fetch('watchlist.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=add&movie_id=${id}&title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}`
+    })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.success || data.error);
+
+            // Only refresh watchlist if we are on watchlist.php
+            if (window.location.pathname.includes("watchlist.php")) {
+                loadWatchlist();
+            }
+        })
+        .catch(error => {
+            console.error("Fetch Error:", error);
+            alert("Failed to add movie. Please try again.");
+        });
+}
+
+// Function to remove a movie from the watchlist
 function removeFromWatchlist(id) {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-    watchlist = watchlist.filter(movie => movie.id !== id);
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
-    loadWatchlist();
+    fetch('watchlist.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=remove&movie_id=${id}`
+    })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.success || data.error);
+            loadWatchlist();
+        });
 }
 
-loadWatchlist();
-
-//  Update Watchlist Count in Header
+// Function to update the watchlist count in the header
 function updateWatchlistCount() {
-    let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-    document.getElementById("watchlist-count").innerText = `(${watchlist.length})`;
+    fetch('watchlist.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'action=load'
+    })
+        .then(response => response.json())
+        .then(watchlist => {
+            const countElement = document.getElementById("watchlist-count");
+            if (countElement) {
+                countElement.innerText = `(${watchlist.length})`;
+            }
+        })
+        .catch(error => console.error("Failed to update watchlist count:", error));
 }
-updateWatchlistCount();
+
+// Load the watchlist and update the count when the page loads
+document.addEventListener("DOMContentLoaded", function() {
+    loadWatchlist();
+    updateWatchlistCount();
+});
+
+
 
 //  Search Functionality
 document.getElementById("search-button").addEventListener("click", function () {
