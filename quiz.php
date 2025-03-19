@@ -85,6 +85,11 @@ $conn->close();
             <option value="partner">Partner</option>
         </select><br>
 
+<!--        <label for="old_question">How old would you like the movie to be?</label>-->
+<!--        <label for="category_question">Select keywords you are interested in</label>-->
+<!--        <label for="rating_question">Select age ratings you are comfortable with</label>-->
+<!--        <label for="more_genre_question">Select additional genres you like</label>-->
+
         <button type="submit" id="submitQuiz">Get Recommendations</button>
     </div>
 

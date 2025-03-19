@@ -93,9 +93,9 @@ if ($is_ajax) {
 
 <?php include_once('header.php'); ?>
 
-<section class="watchlist">
+<section class="watchlist-section">
     <h2>Your Watchlist</h2>
-    <div class="movie-grid" id="watchlist"></div>
+    <div class="watchlist-grid" id="watchlist"></div>
 </section>
 
 <script src="script.js"></script>
