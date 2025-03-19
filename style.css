@@ -601,4 +601,138 @@ header {
     height: 230px;
 }
 
+/* FILTERS SECTION */
+.filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    background-color: rgba(20, 20, 20, 0.8); /* Dark background with slight transparency */
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+}
 
+.filters label {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.filters select {
+    padding: 8px 12px;
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.filters select:hover {
+    border-color: rgb(195, 140, 21); /* Gold border on hover */
+}
+
+.filters button {
+    padding: 8px 16px;
+    background-color: rgb(195, 140, 21);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.filters button:hover {
+    background-color: rgb(220, 160, 40); /* Slightly lighter gold */
+}
+
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        width: 95%;
+        padding: 10px;
+    }
+
+    .filters label,
+    .filters select,
+    .filters button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .filters select {
+        font-size: 13px;
+    }
+
+    .filters button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+
+/* Watchlistt Grid */
+.watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr)); /* 5 movies per row */
+    gap: 20px; /* Space between movies */
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Watchlist Moviezz Card */
+.watchlist-card {
+    background-color: #181818;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.watchlist-card img {
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.watchlist-card h4 {
+    font-size: 16px;
+    color: white;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.watchlist-card:hover {
+    transform: scale(1.05);
+}
+
+/* Remove Button */
+.remove-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}

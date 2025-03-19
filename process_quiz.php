@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
 
-
     // URL to fetch movies based on genre
     $genre_id = isset($genre_ids[strtolower($genre)]) ? $genre_ids[strtolower($genre)] : 28; // Default to action genre if not found
     $url = $base_url . 'discover/movie?api_key=' . $api_key . '&with_genres=' . $genre_id . '&language=en-US&include_adult=false&page=1';
@@ -48,6 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $minVoteCount = 400;
     $url .= "&vote_count.gte=$minVoteCount";
+
+    $url .= "&vote_average.gte=6.5";
 
 
     $response = file_get_contents($url);
@@ -67,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'title' => $movie['title'],
                 'overview' => $movie['overview'],
                 'release_date' => $movie['release_date'],
-
                 'poster_path' => 'https://image.tmdb.org/t/p/w500' . $movie['poster_path'],
                 'vote_average' => $movie['vote_average'],
             ];
