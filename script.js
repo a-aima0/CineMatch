@@ -3,27 +3,58 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_PATH = "https://image.tmdb.org/t/p/w500";
 const IMG_PATH_HIGH_QUALITY = "https://image.tmdb.org/t/p/original";
 
+// click to go to movie page
+document.addEventListener("DOMContentLoaded", () => {
+    const movieGrid = document.querySelector(".movie-grid");
 
-//  Function to Display Movies in a Specific Container
+    if (movieGrid) {
+        movieGrid.addEventListener("click", function(event) {
+            console.log("Clicked element:", event.target);
+
+            let movieLink = event.target.closest(".movie-link");
+
+            if (movieLink) {
+                event.preventDefault();
+                console.log(`Redirecting to: ${movieLink.href}`);
+                window.location.href = movieLink.href;
+            } else {
+                console.log("No valid movie link detected!");
+            }
+        });
+    } else {
+        console.error("Movie grid not found!");
+    }
+
+});
+
+
+// display movies function - works for popular movies, tvshow, toprated and search
+// does not work for hero, tredning, genre, watchlist, random
 function displayMovies(movies, containerId) {
     const movieGrid = document.getElementById(containerId);
-    if (!movieGrid) return; // If container doesn't exist, do nothing
+    if (!movieGrid) return;
 
-    movieGrid.innerHTML = ""; // Clear previous content
+    movieGrid.innerHTML = "";
 
     movies.slice(0, 32).forEach(movie => {
         const movieCard = document.createElement("div");
         movieCard.classList.add("movie-card");
+
         movieCard.innerHTML = `
-            <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title || movie.name}">
-            <h4>${movie.title || movie.name}</h4>
-            <button class="watchlist-btn" onclick="addToWatchlist(${movie.id}, '${movie.title || movie.name}', '${IMG_PATH + movie.poster_path}')">⭐ Add to Watchlist</button>
+            <a href="movie.php?movie_id=${movie.id}" class="movie-link">
+                <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title || movie.name}">
+                <h4>${movie.title || movie.name}</h4>
+            </a>
+<button class="watchlist-btn" onclick="addToWatchlist(${movie.id}, '${movie.title || movie.name}', '${IMG_PATH + movie.poster_path}')">⭐ Add to Watchlist</button>
         `;
+
+        console.log(`Created link: movie.php?movie_id=${movie.id}`);
         movieGrid.appendChild(movieCard);
     });
 }
 
-// Fetch Recommended Movies (Only on Home Page)
+
+// Fetch Popular Movies (Only on Home Page)
 async function fetchRecommendedMovies() {
     if (!document.getElementById("movie-list")) return; // Prevent errors on other pages
     const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&vote_count.gte=300&language=en-US&sort_by=popularity.desc`);
@@ -42,17 +73,27 @@ async function fetchTrendingMovies() {
 
 function displayTrendingMovies(movies) {
     const trendingContainer = document.getElementById("trending-movies");
+    if (!trendingContainer) return;
+
     trendingContainer.innerHTML = ""; // Clear previous content
 
     movies.forEach(movie => {
+        const movieLink = document.createElement("a");
+        movieLink.href = `movie.php?movie_id=${movie.id}`;
+        movieLink.classList.add("movie-link");
+
         const img = document.createElement("img");
         img.src = IMG_PATH + movie.poster_path;
         img.alt = movie.title;
-        trendingContainer.appendChild(img);
+
+
+        movieLink.appendChild(img);
+        trendingContainer.appendChild(movieLink);
     });
 
-    autoSlide();
+    autoSlide(); // Keep this if the slider is working
 }
+
 
 //  Fetch TV Shows (Only on TV Shows Page)
 async function fetchTVShows() {
@@ -88,16 +129,18 @@ async function fetchFeaturedMovies() {
         const movieGenres = movie.genre_ids.map(id => genreData.genres.find(g => g.id === id)?.name).join(", ");
 
         const movieHTML = `
-            <div class="hero-movie-card" style="background-image: url('${IMG_PATH_HIGH_QUALITY + movie.backdrop_path}')">
-                <h1>${movie.title}</h1>
-                <div class="info">
-                    <span class="hero-badge">HD</span>
-                    <span>Release: ${movie.release_date || "N/A"}</span>
-                    <span>IMDB: ${movie.vote_average}</span>
-                    <span>Genre: ${movieGenres}</span>
+            <a href="movie.php?movie_id=${movie.id}" class="hero-movie-link">
+                <div class="hero-movie-card" style="background-image: url('${IMG_PATH_HIGH_QUALITY + movie.backdrop_path}')">
+                    <h1>${movie.title}</h1>
+                    <div class="info">
+                        <span class="hero-badge">HD</span>
+                        <span>Release: ${movie.release_date || "N/A"}</span>
+                        <span>IMDB: ${movie.vote_average}</span>
+                        <span>Genre: ${movieGenres}</span>
+                    </div>
+                    <p>${movie.overview}</p>
                 </div>
-                <p>${movie.overview}</p>
-            </div>
+            </a>
         `;
         featuredMoviesContainer.innerHTML += movieHTML;
     });
@@ -113,7 +156,7 @@ function loadWatchlist() {
     })
         .then(response => response.json())
         .then(watchlist => {
-            console.log(watchlist);  // Log the watchlist data for debugging
+            console.log(watchlist); // Log for debugging
 
             const watchlistContainer = document.getElementById("watchlist");
 
@@ -132,11 +175,16 @@ function loadWatchlist() {
             watchlist.forEach(movie => {
                 const movieCard = document.createElement("div");
                 movieCard.classList.add("movie-card");
+
+                // Make the whole movie card a clickable link
                 movieCard.innerHTML = `
+                <a href="movie.php?movie_id=${movie.movie_id}" class="movie-link">
                     <img src="https://image.tmdb.org/t/p/w500/${movie.movie_image}" alt="${movie.movie_title}">
                     <h4>${movie.movie_title}</h4>
-                    <button class="remove-btn" onclick="removeFromWatchlist(${movie.movie_id})">❌ Remove</button>
-                `;
+                </a>
+                <button class="remove-btn" onclick="removeFromWatchlist(${movie.movie_id})">❌ Remove</button>
+            `;
+
                 watchlistContainer.appendChild(movieCard);
             });
         })
@@ -311,26 +359,6 @@ async function fetchRelatedMovies(movieId) {
     } catch (error) {
         console.error("Error fetching related movies:", error);
     }
-}
-
-
-//  Function to Display Movies in a Grid
-function displayMovies(movies, containerId) {
-    const movieGrid = document.getElementById(containerId);
-    if (!movieGrid) return;
-
-    movieGrid.innerHTML = ""; // Clear old results
-
-    movies.slice(0, 16).forEach(movie => { // show 16 movies
-        const movieCard = document.createElement("div");
-        movieCard.classList.add("movie-card");
-        movieCard.innerHTML = `
-            <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title || movie.name}">
-            <h4>${movie.title || movie.name}</h4>
-            <button class="watchlist-btn" onclick="addToWatchlist(${movie.id}, '${movie.title || movie.name}', '${IMG_PATH + movie.poster_path}')">⭐ Add to Watchlist</button>
-        `;
-        movieGrid.appendChild(movieCard);
-    });
 }
 
 
