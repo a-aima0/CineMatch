@@ -53,7 +53,7 @@ $conn->close();
 
     <!-- Movie Grid -->
     <section class="movie-grid">
-        <h2 id="recommended-for-you">Recommended for You</h2>
+        <h2 id="recommended-for-you">Popular Movies</h2>
         <div class="grid" id="movie-list"></div>
     </section>
 

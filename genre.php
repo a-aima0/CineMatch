@@ -46,21 +46,29 @@ $conn->close();
             const data = await res.json();
             displayMovies(data.results);
         }
-
         function displayMovies(movies) {
             const movieGrid = document.getElementById("movie-list");
             movieGrid.innerHTML = "";
 
             movies.forEach(movie => {
+                const movieLink = document.createElement("a");
+                movieLink.href = `movie.php?movie_id=${movie.id}`;
+                movieLink.classList.add("movie-link");
+
                 const movieCard = document.createElement("div");
                 movieCard.classList.add("movie-card");
                 movieCard.innerHTML = `
-                    <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title}">
-                    <h4>${movie.title}</h4>
-                `;
-                movieGrid.appendChild(movieCard);
+            <img src="${IMG_PATH + movie.poster_path}" alt="${movie.title}">
+            <h4>${movie.title}</h4>
+<button class="watchlist-btn" onclick="addToWatchlist(${movie.id}, '${movie.title || movie.name}', '${IMG_PATH + movie.poster_path}')">⭐ Add to Watchlist</button>
+        `;
+
+                movieLink.appendChild(movieCard);
+                movieGrid.appendChild(movieLink);
             });
         }
+
+
 
         fetchMoviesByGenre();
     </script>

@@ -54,9 +54,29 @@ $conn->close();
             }
         }
 
+        // function displayRandomMovie(movie, type) {
+        //     document.getElementById("random-title").innerText = movie.title || movie.name;
+        //     // document.getElementById("random-duration").innerText = type === "movie" ? `Duration: ${movie.runtime || "N/A"} min` : "";
+        //     document.getElementById("random-imdb-rating").innerText = `IMDB: ${movie.vote_average}`;
+        //     document.getElementById("random-description").innerText = movie.overview;
+        //     document.getElementById("random-genres").innerText = "Genre: Fetching...";
+        //
+        //     // Fetch genre names
+        //     fetch(`${BASE_URL}/genre/${type}/list?api_key=${API_KEY}`)
+        //         .then(res => res.json())
+        //         .then(genreData => {
+        //             const movieGenres = movie.genre_ids.map(id => genreData.genres.find(g => g.id === id)?.name).join(", ");
+        //             document.getElementById("random-genres").innerText = `Genre: ${movieGenres}`;
+        //         });
+        //
+        //     // Set high-quality background image
+        //     document.querySelector(".hero").style.backgroundImage = `url(${IMG_PATH_HIGH_QUALITY + movie.backdrop_path})`;
+        // }
         function displayRandomMovie(movie, type) {
+            const heroSection = document.querySelector(".hero");
+
+            // Set content
             document.getElementById("random-title").innerText = movie.title || movie.name;
-            // document.getElementById("random-duration").innerText = type === "movie" ? `Duration: ${movie.runtime || "N/A"} min` : "";
             document.getElementById("random-imdb-rating").innerText = `IMDB: ${movie.vote_average}`;
             document.getElementById("random-description").innerText = movie.overview;
             document.getElementById("random-genres").innerText = "Genre: Fetching...";
@@ -69,9 +89,15 @@ $conn->close();
                     document.getElementById("random-genres").innerText = `Genre: ${movieGenres}`;
                 });
 
-            // Set high-quality background image
-            document.querySelector(".hero").style.backgroundImage = `url(${IMG_PATH_HIGH_QUALITY + movie.backdrop_path})`;
+            // Set background image
+            heroSection.style.backgroundImage = `url(${IMG_PATH_HIGH_QUALITY + movie.backdrop_path})`;
+
+            // Make Hero Section Clickable
+            const movieLink = `movie.php?movie_id=${movie.id}`;
+            heroSection.style.cursor = "pointer";
+            heroSection.onclick = () => window.location.href = movieLink;
         }
+
 
         fetchRandomMovieOrTV();
     </script>
