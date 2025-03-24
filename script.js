@@ -131,12 +131,12 @@ async function fetchFeaturedMovies() {
         const movieHTML = `
             <a href="movie.php?movie_id=${movie.id}" class="hero-movie-link">
                 <div class="hero-movie-card" style="background-image: url('${IMG_PATH_HIGH_QUALITY + movie.backdrop_path}')">
-                    <h1>${movie.title}</h1>
+                    <h1><b>${movie.title}</b></h1>
                     <div class="info">
                         <span class="hero-badge">HD</span>
-                        <span>Release: ${movie.release_date || "N/A"}</span>
-                        <span>IMDB: ${movie.vote_average}</span>
-                        <span>Genre: ${movieGenres}</span>
+                        <span><b>Release:</b> ${movie.release_date || "N/A"}</span>
+                        <span><b>IMDB:</b> ${movie.vote_average}</span>
+                        <span><b>Genre:</b> ${movieGenres}</span>
                     </div>
                     <p>${movie.overview}</p>
                 </div>
@@ -368,100 +368,100 @@ if (document.getElementById("search-results")) {
     fetchSearchResults();
 }
 
-//  slider preferences
-document.getElementById('submitQuiz').addEventListener('click', function(e) {
-    e.preventDefault();
-    // const formData = {
-    //     genre: document.getElementById('genre_question').value,
-    //     weather: document.getElementById('weather_question').value,
-    //     mood: document.getElementById('mood_question').value,
-    //     company: document.getElementById('company_question').value,
-    //     genre_weight: document.getElementById('genre_slider').value,
-    //     rating_weight: document.getElementById('rating_slider').value,
-    //     recency_weight: document.getElementById('recency_slider').value,
-    //     popularity_weight: document.getElementById('popularity_slider').value,
-    //     keyword_weight: document.getElementById('keywords_slider').value,
-    //     collaborative_weight: document.getElementById('collaborative_slider').value,
-    // };
-
-    const genre = document.getElementById('genre_question').value;
-    const weather = document.getElementById('weather_question').value;
-    const mood = document.getElementById('mood_question').value;
-    const company = document.getElementById('company_question').value;
-    const genre_weight=  document.getElementById('genre_slider').value;
-    const rating_weight=  document.getElementById('rating_slider').value;
-    const recency_weight=  document.getElementById('recency_slider').value;
-    const popularity_weight=  document.getElementById('popularity_slider').value;
-    const keyword_weight=  document.getElementById('keywords_slider').value;
-    const collaborative_weight=  document.getElementById('collaborative_slider').value;
-
-    // Log the data to the console before sending
-    // console.log('Sending data to backend:', formData);
-    fetch('process_quiz.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            genre: genre,
-            weather: weather,
-            mood: mood,
-            company: company,
-            genre_weight: genre_weight,
-            rating_weight: rating_weight,
-            recency_weight: recency_weight,
-            popularity_weight: popularity_weight,
-            keyword_weight: keyword_weight,
-            collaborative_weight: collaborative_weight
-
-        })
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Data received from backend:', data);
-
-            // Check if results exist
-            if (data.results && data.results.length > 0) {
-                const resultsContainer = document.getElementById('results-container');
-                resultsContainer.innerHTML = ''; // Clear any previous results
-
-                data.results.forEach(quizMovie => {
-                    const quizMovieElement = document.createElement('div');
-                    quizMovieElement.classList.add('quiz_movie');
-
-                    // Movie title
-                    const titleElement = document.createElement('h2');
-                    titleElement.textContent = quizMovie.title || 'No title available';
-
-                    // Movie overview
-                    const overviewElement = document.createElement('p');
-                    overviewElement.textContent = quizMovie.overview || 'No description available';
-
-                    // Movie poster image
-                    const posterElement = document.createElement('img');
-                    if (quizMovie.poster_path) {
-                        posterElement.src = `https://image.tmdb.org/t/p/w500${quizMovie.poster_path}`;
-                        posterElement.alt = `Poster of ${quizMovie.title}`;
-                    } else {
-                        posterElement.src = 'default_poster.jpg'; // Use a default poster if no poster path is available
-                        posterElement.alt = 'No poster available';
-                    }
-
-                    // Add movie details to the quiz movie element
-                    quizMovieElement.appendChild(titleElement);
-                    quizMovieElement.appendChild(overviewElement);
-                    quizMovieElement.appendChild(posterElement);
-
-                    // Append the quiz movie element to the results container
-                    resultsContainer.appendChild(quizMovieElement);
-                });
-            } else {
-                console.log('No movie results found.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching movie data:', error);
-        });
-
-
-});
+// //  slider preferences
+// document.getElementById('submitQuiz').addEventListener('click', function(e) {
+//     e.preventDefault();
+//     // const formData = {
+//     //     genre: document.getElementById('genre_question').value,
+//     //     weather: document.getElementById('weather_question').value,
+//     //     mood: document.getElementById('mood_question').value,
+//     //     company: document.getElementById('company_question').value,
+//     //     genre_weight: document.getElementById('genre_slider').value,
+//     //     rating_weight: document.getElementById('rating_slider').value,
+//     //     recency_weight: document.getElementById('recency_slider').value,
+//     //     popularity_weight: document.getElementById('popularity_slider').value,
+//     //     keyword_weight: document.getElementById('keywords_slider').value,
+//     //     collaborative_weight: document.getElementById('collaborative_slider').value,
+//     // };
+//
+//     const genre = document.getElementById('genre_question').value;
+//     const weather = document.getElementById('weather_question').value;
+//     const mood = document.getElementById('mood_question').value;
+//     const company = document.getElementById('company_question').value;
+//     const genre_weight=  document.getElementById('genre_slider').value;
+//     const rating_weight=  document.getElementById('rating_slider').value;
+//     const recency_weight=  document.getElementById('recency_slider').value;
+//     const popularity_weight=  document.getElementById('popularity_slider').value;
+//     const keyword_weight=  document.getElementById('keywords_slider').value;
+//     const collaborative_weight=  document.getElementById('collaborative_slider').value;
+//
+//     // Log the data to the console before sending
+//     // console.log('Sending data to backend:', formData);
+//     fetch('process_quiz.php', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             genre: genre,
+//             weather: weather,
+//             mood: mood,
+//             company: company,
+//             genre_weight: genre_weight,
+//             rating_weight: rating_weight,
+//             recency_weight: recency_weight,
+//             popularity_weight: popularity_weight,
+//             keyword_weight: keyword_weight,
+//             collaborative_weight: collaborative_weight
+//
+//         })
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log('Data received from backend:', data);
+//
+//             // Check if results exist
+//             if (data.results && data.results.length > 0) {
+//                 const resultsContainer = document.getElementById('results-container');
+//                 resultsContainer.innerHTML = ''; // Clear any previous results
+//
+//                 data.results.forEach(quizMovie => {
+//                     const quizMovieElement = document.createElement('div');
+//                     quizMovieElement.classList.add('quiz_movie');
+//
+//                     // Movie title
+//                     const titleElement = document.createElement('h2');
+//                     titleElement.textContent = quizMovie.title || 'No title available';
+//
+//                     // Movie overview
+//                     const overviewElement = document.createElement('p');
+//                     overviewElement.textContent = quizMovie.overview || 'No description available';
+//
+//                     // Movie poster image
+//                     const posterElement = document.createElement('img');
+//                     if (quizMovie.poster_path) {
+//                         posterElement.src = `https://image.tmdb.org/t/p/w500${quizMovie.poster_path}`;
+//                         posterElement.alt = `Poster of ${quizMovie.title}`;
+//                     } else {
+//                         posterElement.src = 'default_poster.jpg'; // Use a default poster if no poster path is available
+//                         posterElement.alt = 'No poster available';
+//                     }
+//
+//                     // Add movie details to the quiz movie element
+//                     quizMovieElement.appendChild(titleElement);
+//                     quizMovieElement.appendChild(overviewElement);
+//                     quizMovieElement.appendChild(posterElement);
+//
+//                     // Append the quiz movie element to the results container
+//                     resultsContainer.appendChild(quizMovieElement);
+//                 });
+//             } else {
+//                 console.log('No movie results found.');
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error fetching movie data:', error);
+//         });
+//
+//
+// });
