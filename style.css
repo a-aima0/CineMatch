@@ -126,10 +126,10 @@ nav a {
 .info {
     margin: 10px 0;
     font-family: 'Poppins', sans-serif;
-    font-size: 12px; 
+    font-size: 12px;
     font-weight: bold
-    
-    
+
+
 }
  .info span {
     margin-right: 10px; /* Adds spacing between elements */
@@ -841,4 +841,63 @@ header {
 
 .hero::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+#recommendations {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    padding: 20px;
+}
+
+.movie-item {
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #000000;
+    overflow: hidden;  /* Prevents content from overflowing */
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.movie-item img {
+    width: 100%;
+    height: auto;
+    max-width: 140px;
+    margin-bottom: 10px;
+}
+
+#get_recs, #quiz-main, #genre_questions, #sliders{
+    margin: 20px;
+    font-size: 16px;
+}
+
+#get_recs{
+    background-color: rgb(73, 75, 135);
+    color: white;
+    padding: 8px;
+    border: 2px solid rgb(73, 75, 135);
+    border-radius: 8px;
+}
+
+.slider {
+    accent-color: #c38c15;
+    background: rgb(73, 75, 135);;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+#quiz-title{
+    font-size: 20px;
+}
+
+#genre_question, #company_question,#weather_question, #mood_question{
+    background-color: #494b87;
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+    border: #494b87;
 }

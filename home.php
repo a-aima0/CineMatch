@@ -34,10 +34,10 @@ $conn->close();
         <div id="featured-movies" class="hero-content">
             <h1 id="featured-title">Movie Title</h1>
             <div class="info">
-                <span class="badge">HD</span>
-                <span id="duration">120 min</span>
-                <span id="imdb-rating">IMDB: 7.5</span>
-                <span id="genres">Genre: Action, Sci-Fi</span>
+                <span class="badge">NA</span>
+                <span id="duration">NA min</span>
+                <span id="imdb-rating">IMDB: NA</span>
+                <span id="genres">Genre: NA</span>
             </div>
             <p id="description">This is a short movie description...</p>
         </div>
