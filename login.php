@@ -54,13 +54,13 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     <link rel="stylesheet" href="loginstyle.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body>
+<body class="login-page">
 <?php if (!empty($error_message)) { ?>
     <p><?= $error_message ?></p>
 <?php } ?>
 
 <div class="container">
-    <div class="leftBox"><img src="assets/placeholder_img.jpg" alt="CineMatch Logo"></div>
+
     <div class="wrapper">
         <form action="login.php" method="POST">
             <h1>Welcome to Cinematch</h1>
