@@ -15,17 +15,18 @@
             <li><a href="watchlist.php">Watchlist <span id="watchlist-count">(0)</span></a></li>
             <li><a href="#" id="random-button">🎲 Random</a></li>
             <li><a href="quiz.php">Quiz</a></li>
+            <li><a href="profile.php">Profile</a></li>
 
 
 
         </ul>
     </nav>
-    <div class="search-bar">
+    <div class="search-bar" >
         <input type="text" id="search-input" placeholder="Enter keywords...">
         <button id="search-button"><i class="material-icons">search</i></button>
 
     </div>
-    <div class="logout-button"  style="float:right;">
-        <a href="logout.php">Logout</a>
-    </div>
+<!--    <div class="logout-button"  style="float:right;">-->
+<!--        <a href="logout.php">Logout</a>-->
+<!--    </div>-->
 </header>
