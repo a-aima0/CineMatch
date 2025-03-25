@@ -1,0 +1,466 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+}
+
+.page {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.profile {
+    flex: 0.7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px;
+    height: 100%;
+    padding: 20px;
+}
+
+.profile-pic-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.username, .email {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.change-password {
+    color: blue;
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+}
+
+.delete-account {
+    color: red;
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+}
+
+.watchlist-container {
+    flex: 1;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.watchlist-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.watchlist-wrapper {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    white-space: nowrap;
+    position: relative;
+}
+
+.watchlist {
+    display: flex;
+    gap: 15px;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.watchlist-item {
+    flex-shrink: 0;
+    width: 180px;
+    height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 10px;
+    scroll-snap-align: start;
+}
+
+.watchlist-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.watchlist-item:hover .watchlist-item-img {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.arrow {
+    position: absolute;
+    font-size: 40px;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: gray;
+    z-index: 10;
+    user-select: none;
+}
+
+.left-arrow {
+    left: 10px;
+    display: none;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.watchlist-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.watchlist-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.arrow:hover {
+    color: white;
+}
+
+
+
+
+
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: white;
+    margin: 0;
+    padding-top: 80px;
+    width: 100%; /* Ensure the width doesn't exceed the viewport */
+    overflow-x: hidden;
+}
+
+
+
+/* Sticky Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 20px;
+    overflow: hidden;
+    background: black;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1DBF73;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: #222;
+    border-radius: 30px;
+    padding: 2px;
+    margin-left: 60px;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 8px;
+    width: 280px;
+    outline: none;
+}
+
+.search-bar button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding:6px;
+    color: white;
+    font-size: 18px;
+}
+
+/* Make the search icon change color when hovered */
+.search-bar button:hover {
+    color: rgb(64, 64, 64); /* Green color like Netflix */
+}
+
+
+
+ul {
+
+    padding-inline-start: 20px;
+}
+
+/* Button Styling */
+#random-button {
+    background-color: rgb(73, 75, 135);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#random-button:hover {
+    background-color: rgb(73, 75, 135);
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    display: none;
+    background: black;
+    padding: 5px;
+    list-style: none;
+    top: 100%; /* Position it directly below the parent */
+    left: 0;
+    min-width: 150px;
+    z-index: 9999; /* Bring the dropdown above other elements */
+}
+
+/* Show the dropdown when hovering */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    padding: 4px;
+}
+
+.dropdown-menu li a {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Optionally add hover effect on menu items */
+.dropdown-menu li a:hover {
+    background-color: #444;
+}
+
+/* Ensuring the dropdown can overlay on top of the header */
+body, html {
+    position: relative; /* Ensures body is layered above anything else */
+    z-index: 1;
+}
+
+/* Ensure the nav doesn't constrain the dropdown */
+nav {
+    position: relative;
+    z-index: 2; /* Ensure the navigation bar itself has a lower z-index */
+}
+
+/* Prevent clipping issues caused by any parent element's overflow */
+nav, header, .dropdown {
+    overflow: visible; /* Ensure the dropdown can extend out of the header */
+}
+
+
+
+/* Watchlist Button */
+.watchlist-btn {
+    background-color: #1DBF73;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+/* Remove Button */
+.remove-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+
+/* Transparent Header */
+header {
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent black */
+}
+/* Search Results Heading */
+
+
+/* Logo Section */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between logo and text */
+}
+
+/* Logo Image */
+.logo img {
+    width: 70px; /* Adjust size as needed */
+    height: auto;
+    object-fit: contain; /* Ensures correct aspect ratio */
+}
+
+/* Logo Text */
+.logo span {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(195, 140, 21);
+}
+
+
+
+/* Watchlistt Grid */
+.watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr)); /* 5 movies per row */
+    gap: 20px; /* Space between movies */
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Watchlist Moviezz Card */
+.watchlist-card {
+    background-color: #181818;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.watchlist-card img {
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.watchlist-card h4 {
+    font-size: 16px;
+    color: white;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.watchlist-card:hover {
+    transform: scale(1.05);
+}
+
+/* Remove Button */
+.remove-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+
+
+.logout-button{
+    margin: 10px;
+    border: 1px white solid;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/*logout button*/
+.logout-button a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+
+}
+.logout-button a:hover{
+    color: white;
+    font-size: 16px;
+
+    font-weight: bold;
+
+}
+
+
+
