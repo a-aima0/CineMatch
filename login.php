@@ -50,7 +50,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width-device-width,
          initial-scale=1">
-    <title>CineMatch login</title>
+    <title>CineMatch - Login</title>
     <link rel="stylesheet" href="loginstyle.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -60,7 +60,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 <?php } ?>
 
 <div class="container">
-
+    <div class="leftBox"></div>
     <div class="wrapper">
         <form action="login.php" method="POST">
             <h1>Welcome to Cinematch</h1>

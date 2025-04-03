@@ -112,133 +112,248 @@
 /*}*/
 
 
-
-
-/* Reset default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
-
-/* Full-screen dark background */
 body {
-    background: #0e0e0e;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: #333;
 }
-
-/* Login container (no logo) */
 .container {
-    background: #1c1c1c;
-    padding: 70px 50px;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(222, 108, 209, 0.3);
-    width: 100%;
-    max-width: 400px;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+.wrapper {
+    flex: 0.7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: #282828;
 }
 
-/* Heading style */
-.container h1 {
-    font-family: 'Orbitron', sans-serif;
-    text-align: center;
-    color: #494b87;
-    margin-bottom: 30px;
+.leftBox {
+    flex: 1.3;
+    background: url(assets/regbackground.jpg) no-repeat center center/cover;
+}
+
+.wrapper h1 {
     font-size: 28px;
-    text-shadow: 0 0 8px rgba(203, 129, 238, 0.6);
+    margin-bottom: 50px;
+    font-weight: bold;
+    color: #fff;
 }
-
-/* Input field wrapper */
-.input-box {
+.wrapper .input-box {
     position: relative;
-    margin-bottom: 20px;
-}
+    width: 100%;
+    margin-bottom: 25px;
+    max-width: 350px;
 
-/* Input fields */
+}
 .input-box input {
     width: 100%;
-    padding: 12px 45px 12px 15px;
-    background: #2c2c2c;
-    border: none;
-    border-radius: 30px;
-    color: white;
-    font-size: 14px;
-    outline: none;
+    height: 45px;
+    border: 1px solid #777;
+    border-radius: 25px;
+    font-size: 16px;
+    color:#333;
+    padding: 10px 15px;
 }
-
-/* Icons inside input */
+.input-box input::placeholder {
+    color: #333;
+}
 .input-box i {
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #ccc;
-    font-size: 18px;
+    font-size: 20px;
+    color: #777;
 }
-
-/* Remember me & forgot password */
-.remember-forgot {
+.wrapper .remember-forgot {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
+    width: 100%;
+    max-width: 350px;
+    font-size: 14px;
     margin-bottom: 20px;
+    color:#fff;
 }
-
+.remember-forgot label input {
+    accent-color: #fff;
+    margin-right: 3px;
+}
 .remember-forgot a {
-    color: #494b87;
+    color: #fff;
     text-decoration: none;
 }
-
 .remember-forgot a:hover {
     text-decoration: underline;
 }
-
-/* Login button */
-.btn {
+.wrapper .btn {
     width: 100%;
-    padding: 12px;
-    background: #9701d2;
-    color: white;
-    font-size: 16px;
+    max-width: 350px;
+    height: 50px;
+    background: #fff;
     border: none;
-    border-radius: 30px;
+    outline: none;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: background 0.3s ease;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
 }
-
-.btn:hover {
-    background: #494b87;
-}
-
-/* Register link */
-.register-link {
+.wrapper .register-link {
+    font-size: 14px;
     text-align: center;
     margin-top: 20px;
-    font-size: 14px;
+    color: #fff;
 }
-
-.register-link a {
-    color: #494b87;
+.register-link p a {
+    color: #fff;
     text-decoration: none;
+    font-weight: 600;
 }
-
-.register-link a:hover {
+.register-link p a:hover {
     text-decoration: underline;
 }
 
-.login-page::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("assets/photo.webp") no-repeat center center/cover;
-    z-index: -1;
-}
 
+
+/*!* Reset default styles *!*/
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*!* Full-screen dark background *!*/
+/*body {*/
+/*    background: #0e0e0e;*/
+/*    color: white;*/
+/*    font-family: 'Poppins', sans-serif;*/
+/*    height: 100vh;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*!* Login container (no logo) *!*/
+/*.container {*/
+/*    background: #1c1c1c;*/
+/*    padding: 70px 50px;*/
+/*    border-radius: 15px;*/
+/*    box-shadow: 0 0 25px rgba(222, 108, 209, 0.3);*/
+/*    width: 100%;*/
+/*    max-width: 400px;*/
+/*}*/
+
+/*!* Heading style *!*/
+/*.container h1 {*/
+/*    font-family: 'Orbitron', sans-serif;*/
+/*    text-align: center;*/
+/*    color: #494b87;*/
+/*    margin-bottom: 30px;*/
+/*    font-size: 28px;*/
+/*    text-shadow: 0 0 8px rgba(203, 129, 238, 0.6);*/
+/*}*/
+
+/*!* Input field wrapper *!*/
+/*.input-box {*/
+/*    position: relative;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*!* Input fields *!*/
+/*.input-box input {*/
+/*    width: 100%;*/
+/*    padding: 12px 45px 12px 15px;*/
+/*    background: #2c2c2c;*/
+/*    border: none;*/
+/*    border-radius: 30px;*/
+/*    color: white;*/
+/*    font-size: 14px;*/
+/*    outline: none;*/
+/*}*/
+
+/*!* Icons inside input *!*/
+/*.input-box i {*/
+/*    position: absolute;*/
+/*    right: 15px;*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
+/*    color: #ccc;*/
+/*    font-size: 18px;*/
+/*}*/
+
+/*!* Remember me & forgot password *!*/
+/*.remember-forgot {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    font-size: 13px;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.remember-forgot a {*/
+/*    color: #494b87;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*.remember-forgot a:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+
+/*!* Login button *!*/
+/*.btn {*/
+/*    width: 100%;*/
+/*    padding: 12px;*/
+/*    background: #9701d2;*/
+/*    color: white;*/
+/*    font-size: 16px;*/
+/*    border: none;*/
+/*    border-radius: 30px;*/
+/*    cursor: pointer;*/
+/*    transition: background 0.3s ease;*/
+/*}*/
+
+/*.btn:hover {*/
+/*    background: #494b87;*/
+/*}*/
+
+/*!* Register link *!*/
+/*.register-link {*/
+/*    text-align: center;*/
+/*    margin-top: 20px;*/
+/*    font-size: 14px;*/
+/*}*/
+
+/*.register-link a {*/
+/*    color: #494b87;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*.register-link a:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+
+/*.login-page::before {*/
+/*    content: "";*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("assets/photo.webp") no-repeat center center/cover;*/
+/*    z-index: -1;*/
+/*}*/
