@@ -3,11 +3,11 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");  // Redirect to login if not logged in
+    header("Location: login.php");  // redirect to login if not logged in
     exit();
 }
 
-require_once('connection.php'); // Include your database connection
+require_once('connection.php');
 
 
 $conn->close();
@@ -29,7 +29,7 @@ $conn->close();
 
     <?php include_once('header.php'); ?>
 
-    <!-- Hero Section (Featured Movie) -->
+
     <section class="hero">
         <div id="featured-movies" class="hero-content">
             <h1 id="featured-title">Movie Title</h1>
@@ -43,7 +43,7 @@ $conn->close();
         </div>
     </section>
 
-    <!-- Trending Movies -->
+
     <section class="trending">
         <h2>Trending Movies</h2>
         <div class="trending-container">
@@ -51,7 +51,7 @@ $conn->close();
         </div>
     </section>
 
-    <!-- Movie Grid -->
+
     <section class="movie-grid">
         <h2 id="recommended-for-you">Popular Movies</h2>
         <div class="grid" id="movie-list"></div>

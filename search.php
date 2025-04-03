@@ -3,11 +3,11 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");  // Redirect to login if not logged in
+    header("Location: login.php");  // redirect to login if not logged in
     exit();
 }
 
-require_once('connection.php'); // Include your database connection
+require_once('connection.php');
 
 
 $conn->close();
@@ -57,7 +57,7 @@ $conn->close();
     <div class="movie-grid" id="related-movies"></div>
 </section>
 
-<!-- Load JavaScript -->
+
 <script src="script.js"></script>
 <script>
     let allSearchResults = [];

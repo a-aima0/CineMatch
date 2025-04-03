@@ -42,7 +42,7 @@ if ($is_ajax) {
         $checkStmt->store_result();
 
         if ($checkStmt->num_rows === 0) {
-            // Insert the movie if not already added
+
             $stmt = $conn->prepare("INSERT INTO watchlist (user_id, movie_id, movie_title, movie_image) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("iiss", $user_id, $movie_id, $title, $image);
             if ($stmt->execute()) {

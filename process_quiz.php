@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 $tmdb_api_key = "ff024c8b4942e7ebf52baf82685c5249";
-// Fetch the genre list from TMDB
+
 $genre_url = "https://api.themoviedb.org/3/genre/movie/list?api_key=$tmdb_api_key&language=en-US";
 $genre_response = file_get_contents($genre_url);
 $genre_data = json_decode($genre_response, true);
@@ -60,10 +60,10 @@ if (empty($movies_data)) {
     die(json_encode(["error" => "No movies found for genre ID $genre"]));
 }
 
-// Shuffle movies to add diversity
+
 shuffle($movies_data);
 
-// Dummy data for keyword-based matching (replace with a proper dataset)
+
 $keyword_map = [
     "sunny" => ["adventure", "light-hearted", "feel-good"],
     "rainy" => ["mystery", "thriller", "drama"],
@@ -76,18 +76,18 @@ $keyword_map = [
     "family" => ["animation", "adventure", "fantasy"]
 ];
 
-// Compute movie scores
+
 $movies = [];
 foreach ($movies_data as $movie) {
     $score = 0;
 
-    // Weighted scoring
+
 //    $score += $weights["genre"] * (isset($movie["genre_ids"]) && in_array($genre, $movie["genre_ids"]) ? 1 : 0);
     $score += $weights["rating"] * ($movie["vote_average"] / 10);
     $score += $weights["recency"] * (1 / (2025 - (int)substr($movie["release_date"], 0, 4) + 1));
     $score += $weights["popularity"] * ($movie["popularity"] / 1000);
 
-    // Keyword matching
+
     $matched_keywords = 0;
     if (!empty($keyword_map[$weather])) {
         foreach ($keyword_map[$weather] as $kw) {

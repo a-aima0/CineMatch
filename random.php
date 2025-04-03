@@ -3,11 +3,11 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");  // Redirect to login if not logged in
+    header("Location: login.php");  // redirect to login if not logged in
     exit();
 }
 
-require_once('connection.php'); // Include your database connection
+require_once('connection.php');
 
 
 $conn->close();
@@ -25,7 +25,6 @@ $conn->close();
 
 <?php include_once('header.php'); ?>
 
-    <!-- Hero Section for the Random Movie -->
     <section class="hero">
         <div class="hero-content">
             <h1 id="random-title">Loading...</h1>
@@ -43,7 +42,7 @@ $conn->close();
     <script>
         async function fetchRandomMovieOrTV() {
             const randomType = Math.random() < 0.5 ? "movie" : "tv"; // 50% chance of movie or TV show
-            const randomPage = Math.floor(Math.random() * 500) + 1; // Random page from TMDb
+            const randomPage = Math.floor(Math.random() * 500) + 1;
             const res = await fetch(`${BASE_URL}/discover/${randomType}?api_key=${API_KEY}&page=${randomPage}&vote_count.gte=300&vote_average.gte=6.5`);
             const data = await res.json();
 
@@ -89,10 +88,10 @@ $conn->close();
                     document.getElementById("random-genres").innerText = `Genre: ${movieGenres}`;
                 });
 
-            // Set background image
+
             heroSection.style.backgroundImage = `url(${IMG_PATH_HIGH_QUALITY + movie.backdrop_path})`;
 
-            // Make Hero Section Clickable
+
             const movieLink = `movie.php?movie_id=${movie.id}`;
             heroSection.style.cursor = "pointer";
             heroSection.onclick = () => window.location.href = movieLink;

@@ -2,35 +2,31 @@
 
 session_start();
 
-// Check if the user is logged in
+// check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");  // Redirect to login if not logged in
+    header("Location: login.php");  // redirect to login if not logged in
     exit();
 }
 
-require_once('connection.php'); // Include your database connection
+require_once('connection.php');
 
-// Get the movie_id from the URL query string
+// get the movie_id from the URL query string
 $movie_id = isset($_GET['movie_id']) ? $_GET['movie_id'] : null;
 
 if ($movie_id) {
-    // Use the $movie_id to fetch the movie details from your API
-    $api_key = 'ff024c8b4942e7ebf52baf82685c5249'; // Replace with your TMDb API key
+    // Use the $movie_id to fetch the movie details from API
+    $api_key = 'ff024c8b4942e7ebf52baf82685c5249';
     $url = "https://api.themoviedb.org/3/movie/{$movie_id}?api_key={$api_key}&language=en-US";
 
-    // Initialize cURL session
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $response = curl_exec($ch);
     curl_close($ch);
 
-    // Decode the JSON response
     $movie_data = json_decode($response, true);
 
 
-
-    // Check if the data exists and assign variables
     if ($movie_data && isset($movie_data['title'], $movie_data['overview'], $movie_data['poster_path'], $movie_data['release_date'], $movie_data['vote_average'], $movie_data['tagline'])) {
         $title = $movie_data['title'];
         $overview = $movie_data['overview'];
@@ -48,7 +44,7 @@ if ($movie_id) {
         $tagline = "";
     }
 } else {
-    // If no movie_id is provided
+
     $title = "No movie selected";
     $overview = "Please select a movie to view details.";
     $poster_path = "";

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('connection.php'); // Include your database connection
+require_once('connection.php');
 
 //// Check if the user is already logged in, redirect to dashboard if true
 //if (isset($_SESSION['username'])) {
@@ -22,15 +22,15 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 
     $query = "SELECT username, password FROM users WHERE username = '$username' and password = '$password'";
 
-    // Run Select SQL query
+    // run Select SQL query
     $results = $conn->query($query);
 
     $count = $results->num_rows;
 
-    // Close connection after executing the query
+    // close connection after executing the query
     $conn->close();
 
-    // If result matched given username and password, there must be 1 row
+    // if result matched given username and password, there must be 1 row
     if ($count == 1) {
         $_SESSION["username"] = $username;
 

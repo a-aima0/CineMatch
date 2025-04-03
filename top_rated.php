@@ -3,11 +3,11 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");  // Redirect to login if not logged in
+    header("Location: login.php");  // redirect to login if not logged in
     exit();
 }
 
-require_once('connection.php'); // Include your database connection
+require_once('connection.php');
 
 
 $conn->close();
@@ -25,7 +25,7 @@ $conn->close();
 
 <?php include_once('header.php'); ?>
 
-    <!-- Filters Section -->
+
     <section class="filters">
         <label for="genre-filter">Genre:</label>
         <select id="genre-filter">
@@ -49,7 +49,7 @@ $conn->close();
         <button id="apply-filters">Apply</button>
     </section>
 
-    <!-- Top Rated Movies Section -->
+
     <section class="movie-grid">
         <h2>Top Rated Movies</h2>
         <div class="grid" id="top-rated-list"></div>

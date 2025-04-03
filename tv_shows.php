@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-require_once('connection.php'); // Include your database connection
+require_once('connection.php');
 
 
 $conn->close();
@@ -71,7 +71,7 @@ $conn->close();
             allTVShows = data.results;
             displayMovies(allTVShows, "tv-show-list");
 
-            await fetchGenres(); //  Ensure genres are fetched before filtering
+            await fetchGenres();
             populateYears();
         } catch (error) {
             console.error("Error fetching TV Shows:", error);

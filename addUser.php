@@ -15,7 +15,7 @@ if (isset($_POST['table'])) {
     die("Error: Table name is not specified.");
 }
 
-// Get the table name from the session
+// get the table name from the session
 $table_name = $_SESSION['table'];
 
 if (empty($table_name)) {

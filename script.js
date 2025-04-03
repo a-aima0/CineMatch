@@ -91,11 +91,11 @@ function displayTrendingMovies(movies) {
         trendingContainer.appendChild(movieLink);
     });
 
-    autoSlide(); // Keep this if the slider is working
+    autoSlide(); // keep this if the slider is working :)
 }
 
 
-//  Fetch TV Shows (Only on TV Shows Page)
+//  Fetch TV Shows
 async function fetchTVShows() {
     if (!document.getElementById("tv-show-list")) return;
     const res = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}`);
@@ -103,7 +103,7 @@ async function fetchTVShows() {
     displayMovies(data.results, "tv-show-list");
 }
 
-// Fetch Top Rated Movies (Only on Top Rated Page)
+// Fetch Top Rated Movies
 async function fetchTopRatedMovies() {
     if (!document.getElementById("top-rated-list")) return;
     const res = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}`);
@@ -117,13 +117,13 @@ async function fetchFeaturedMovies() {
 
     const res = await fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`);
     const data = await res.json();
-    const movies = data.results.slice(0, 5); // Get the top 5 trending movies
+    const movies = data.results.slice(0, 5); // Get the top 5 trending movies - can change this
 
     const genresRes = await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
     const genreData = await genresRes.json();
 
     const featuredMoviesContainer = document.getElementById("featured-movies");
-    featuredMoviesContainer.innerHTML = ""; // Clear existing content
+    featuredMoviesContainer.innerHTML = "";
 
     movies.forEach(movie => {
         const movieGenres = movie.genre_ids.map(id => genreData.genres.find(g => g.id === id)?.name).join(", ");
@@ -268,7 +268,7 @@ document.getElementById("random-button").addEventListener("click", function (eve
     window.location.href = "random.php";
 });
 
-//  Run Functions Only on Their Respective Pages
+//  Run Functions Only on Their  Pages
 fetchRecommendedMovies(); // Home Page
 fetchTrendingMovies(); // Home Page
 fetchTVShows(); // TV Shows Page
